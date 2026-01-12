@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import 'express-async-errors';
 import setupSwagger from './docs/swagger.js';
+import authRoutes from './routes/auth.routes.js'; // rotas de auth do vendedor
 
 const app = express();
 
@@ -23,6 +24,9 @@ app.use('/api', limiter);
 
 // Configurar Swagger
 setupSwagger(app);
+
+// Rotas de autenticação de vendedores
+app.use('/auth', authRoutes);
 
 // Rota de teste
 app.get('/', (req, res) => {
@@ -48,3 +52,4 @@ app.use((err, req, res, next) => {
 });
 
 export default app;
+
